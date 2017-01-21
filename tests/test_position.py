@@ -1,9 +1,17 @@
-from tt.position import *
+"""
+Test cases for Position Class
+"""
 
-class TestPosition:
+from tt.position import Position
 
-    def __init__(self):
-        self.zgzt = Position('601390')
+# Sample instance for testing
+ZGZT = Position('601390')
+ZGCB = Position('600150')
 
-    def test_init(self):
-        assert self.zgzt.sid == '601390'
+
+def test_init():
+    """
+    test cases for __init__ method
+    """
+    assert ZGZT.sid == '601390'
+    assert ZGCB.sid == '600150'
