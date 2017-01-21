@@ -25,20 +25,20 @@ def profit(file='data/profit.csv'):
     profit_df = pd.read_csv(file, index_col='date', parse_dates=True)
     return profit_df
 
+def latest_date():
+    latest_date = []
+    files = os.listdir()
+
+def latest_date():
+    latest_date = []
+    files = os.listdir('data')
+    for f in files:
+        df = pd.read_csv('data/{}'.format(f), index_col='date', parse_dates=True)
+        latest_date.append(df.index[-1])
+    return latest_date
+
 
 def test():
-    df = get_data(601989)
     print(60 * '-')
-    print(df)
-
-    def total_share(symbol):
-        df = get_data(symbol)
-        return df['quantity'].sum()
-
-    share = total_share(601989)
-    print(share)
-    print(position_list())
-    print(len(position_list()))
-
-
-test()
+    print(latest_date())
+    print(max(latest_date()))
