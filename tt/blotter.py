@@ -20,3 +20,10 @@ class Blotter:
             data = data.append(df)
 
         return data
+
+    def check_data(self):
+        """
+        Check data's potential mistakes
+        Return True if there's no mistake be found
+        """
+        pass
