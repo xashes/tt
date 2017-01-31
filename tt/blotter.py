@@ -3,22 +3,16 @@ import pandas as pd
 
 
 class Blotter:
+    def __init__(self, data_file='~/Dropbox/Apps/tt/blotter.csv'):
+        self.data_file = data_file
 
-    @property
-    def data_frame(self, base_dir='data'):
-        """
-        Return: DataFrame
-        """
-        files = os.listdir(base_dir)
-        data = pd.DataFrame()
-
-        for fname in files:
-            sid = fname.split('.')[0]
-            df = pd.read_csv(
-                os.path.join(base_dir, fname), index_col='date', parse_dates=True)
-            df['sid'] = sid
-            data = data.append(df)
-
+    def get_data(self):
+        data = pd.read_csv(
+            self.data_file,
+            index_col='date',
+            parse_dates=True,
+            dtype={'sid': object})
+        data.sort_index(inplace=True)
         return data
 
     def check_data(self):
