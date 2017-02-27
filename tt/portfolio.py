@@ -28,4 +28,4 @@ class Portfolio(object):
 
     @property
     def blotter(self):
-        return Blotter().data_frame
+        return Blotter().get_data()
