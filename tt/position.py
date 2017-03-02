@@ -1,10 +1,11 @@
+import pandas as pd
+
+from tt.blotter import Blotter
+
 class Position:
 
     def __init__(self, sid):
         self.sid = sid
-        self.quantity = 0
-        self.bought_quantity = 0
-        self.sold_quantity = 0
         self.bought_value = 0
         self.sold_value = 0
         self.total_trades = 0
@@ -15,3 +16,20 @@ class Position:
 
     def __repr__(self):
         return "Position({})".format(self.__dict__)
+
+    @property
+    def records(self):
+        blotters = Blotter().get_data()
+        return blotters[blotters['sid']==self.sid]
+
+    @property
+    def quantity(self):
+        return self.records.quantity.sum()
+
+    @property
+    def bought_quantity(self):
+        return self.records[self.records['type']=='buy'].quantity.sum()
+
+    @property
+    def sold_quantity(self):
+        return -self.records[self.records['type']=='sell'].quantity.sum()
